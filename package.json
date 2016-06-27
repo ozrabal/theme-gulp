@@ -1,5 +1,5 @@
 {
-  "name": "Theme",
+  "name": "theme",
   "version": "2.0.0",
   "description": "Gulp workflow for static html template",
   "main": "index.html",
@@ -36,6 +36,7 @@
     "imagemin-pngquant": "^5.0.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.2.1"
+
   },
   "scripts": {
   },

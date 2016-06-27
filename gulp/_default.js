@@ -9,7 +9,8 @@ global.paths = {
     scriptDist: '_static/js',
 
     vendorSrc: '_src/js/vendor',
-
+    vendorsAllFile: 'vendors.all.js',
+    
     styleSrc: '_src/css/src/**/*.scss',
     styleDist: '_static/css',
     styleDev: '_theme',

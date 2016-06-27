@@ -10,25 +10,27 @@ var gulp = require('gulp'),
         'index.js'
     ],
     vendor = [
-
-        'bootstrap',
-        'bootstrap-accessibility.min',
-        'jquery.cookie',
-        'jquery.cycle2.min',
-        'jquery.cycle2.swipe.min',
-        'table-fixed-header',
-        'jquery.fancybox-1.3.4'
+        '_src/js/vendor/jquery/jquery.js',
+        '_src/js/vendor/bootstrap/bootstrap.js',
     ],
     vendorOrder = [
-        'jquery.fancybox-1.3.4.js',
-        'bootstrap.js',
-        'bootstrap-accessibility.min.js',
-        'jquery.cookie.js',
-        'jquery.cycle2.min.js',
-        'jquery.cycle2.swipe.min.js',
-        'table-fixed-header.js',
-
+        'jquery.js',
+        'bootstrap.js'
     ];
+
+//concatenate vendors
+gulp.task('vendor-concat', function(){
+    return gulp.src(vendor.map(function(f) {
+            return f;
+        }))
+        .pipe(order(vendorOrder))
+        .pipe(concat(global.paths.vendorsAllFile))
+        .pipe(gulp.dest(global.paths.src + '/js'))
+        .on('error', gutil.log);
+});
+
+
+
 
 gulp.task('scripts', function () {
     return gulp.src([
