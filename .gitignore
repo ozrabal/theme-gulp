@@ -8,18 +8,8 @@ logs
 npm-debug.log*
 
 bower_components
-node_modules
 
-_src/*.html
-!_src/html/src
-
-_src/js/*
-!_src/js/src
-
-_src/css/*
-!_src/css/src
-
-_src/img/*
+_src/*
 _static
 _theme
 _dist
