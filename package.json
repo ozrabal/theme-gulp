@@ -16,12 +16,13 @@
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean-css": "^2.0.8",
     "gulp-concat": "^2.6.0",
     "gulp-html-replace": "^1.6.0",
     "gulp-html-validator": "0.0.5",
-    "gulp-imagemin": "^3.0.1",
-    "gulp-clean-css": "^2.0.8",
     "gulp-htmlmin": "^2.0.0",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-notify": "^2.2.0",
     "gulp-order": "^1.1.1",
     "gulp-preprocess": "^2.0.0",
     "gulp-prettify": "^0.4.0",
@@ -33,12 +34,12 @@
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.2.0",
     "gulp.spritesmith": "^6.2.1",
+    "gup-notify": "^2.2.0",
     "imagemin-pngquant": "^5.0.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.2.1"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
     "preprocess": "^3.1.0"
   },
