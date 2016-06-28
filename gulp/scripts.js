@@ -53,9 +53,22 @@ gulp.task('scripts-concat', function(){
         .pipe(gulp.dest(global.paths.src + '/js'))
         .pipe(browserSync.reload({stream: true}))
         .on('error', gutil.log);
-    
 });
 
+//minimise scripts
+gulp.task('scripts-min', ['scripts-concat'], function(){
+    return gulp.src([
+            global.paths.src + '/js/' + global.paths.scriptsAllFile
+        ])
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: './src'}))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(global.paths.src + '/js'))
+        .on('error', gutil.log);
+});
 
 
 
@@ -74,7 +87,7 @@ gulp.task('scripts-concat', function(){
         .on('error', gutil.log);
 });*/
 
-gulp.task('scripts-theme', function () {
+/*gulp.task('scripts-theme', function () {
     return gulp.src(global.paths.src + '/js/app.js')
         .pipe(sourcemaps.init())
         .pipe(uglify())
@@ -86,7 +99,7 @@ gulp.task('scripts-deploy', ['scripts'], function () {
     return gulp.src(global.paths.src + '/js/app.js')
         .pipe(uglify())
         .pipe(gulp.dest(global.paths.dist + '/js'));
-});
+});*/
 
 
 
