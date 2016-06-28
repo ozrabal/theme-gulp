@@ -29,6 +29,22 @@ gulp.task('vendor-concat', function(){
         .on('error', gutil.log);
 });
 
+//minimise concatenated vendors
+gulp.task('vendor-min',['vendor-concat'], function(){
+    return gulp.src(global.paths.src + '/js/' + global.paths.vendorsAllFile)
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: './src'}))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(global.paths.src + '/js'));
+});
+
+
+
+
+
 
 
 
