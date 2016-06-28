@@ -6,8 +6,9 @@ global.paths = {
 
 
     scriptSrc: '_src/js/src/**/*.js',
-    scriptsAllFile: global.themeName + '.all.js',
+    scriptsAllFile: 'scripts.all.js',
     scriptDist: '_static/js',
+    scriptTheme: './_theme/js',
 
     vendorSrc: '_src/js/vendor',
     vendorsAllFile: 'vendors.all.js',
