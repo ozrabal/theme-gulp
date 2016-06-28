@@ -41,14 +41,27 @@ gulp.task('vendor-min',['vendor-concat'], function(){
         .pipe(gulp.dest(global.paths.src + '/js'));
 });
 
+//concatenate scripts
+gulp.task('scripts-concat', function(){
+    return gulp.src([
+            global.paths.scriptSrc
+        ])
+        .pipe(sourcemaps.init())
+        .pipe(order(scriptsOrder))
+        .pipe(concat(global.paths.scriptsAllFile))
+        .pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: './src'}))
+        .pipe(gulp.dest(global.paths.src + '/js'))
+        .pipe(browserSync.reload({stream: true}))
+        .on('error', gutil.log);
+    
+});
 
 
 
 
 
 
-
-gulp.task('scripts', function () {
+/*gulp.task('scripts', function () {
     return gulp.src([
             global.paths.scriptSrc
         ])
@@ -59,7 +72,7 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest(global.paths.src + '/js'))
         .pipe(browserSync.reload({stream: true}))
         .on('error', gutil.log);
-});
+});*/
 
 gulp.task('scripts-theme', function () {
     return gulp.src(global.paths.src + '/js/app.js')
@@ -95,6 +108,7 @@ gulp.task('scripts-deploy', ['scripts'], function () {
         .pipe(gulp.dest(global.paths.theme + '/js'))
 });*/
 
+/*
 gulp.task('vendor', function () {
     return gulp.src(vendor.map(function(f) {
             return global.paths.vendorSrc + '/' + f + '.js';
@@ -110,4 +124,4 @@ gulp.task('vendor', function () {
         .pipe(gulp.dest(global.paths.src + '/js'))
         .pipe(gulp.dest(global.paths.theme + '/js'))
         .on('error', gutil.log);
-});
+});*/
