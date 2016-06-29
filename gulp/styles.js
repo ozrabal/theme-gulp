@@ -18,6 +18,7 @@ var gulp = require('gulp'),
         'swiper.css'
     ];
 
+//concatenate vendors
 gulp.task('styles-vendor-concat', function(){
     return gulp.src(cssVendor.map(function(f) {
             return f;
@@ -28,13 +29,21 @@ gulp.task('styles-vendor-concat', function(){
         .on('error', gutil.log);
 });
 
+//copy vendors to theme dir
+gulp.task('styles-vendor-theme', ['styles-vendor-concat'], function(){
+    return gulp.src(global.paths.src + '/css/'+ global.paths.styleCssVendorAllFile )
+        .pipe(gulp.dest(global.paths.styleDev + '/css'));
+});
+
+
+
 
 
 gulp.task('styles', ['styles-dev'], function () {
     return gulp.src(global.paths.src + '/css/src/main.scss')
         .pipe(preprocess({context: {ROOT: '/'}}))
         .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'compressed'}))
+        .pipe(sass({outputStyle: 'compact'}))
         .pipe(autoprefixer({browsers: ['> 1%']}))
         .pipe(sourcemaps.write('.'))
         .pipe(rename({basename: 'style'}))
