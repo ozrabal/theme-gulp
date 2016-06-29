@@ -6,7 +6,29 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     cleanCSS = require('gulp-clean-css'),
     rename = require("gulp-rename"),
-    preprocess = require('gulp-preprocess');
+    preprocess = require('gulp-preprocess'),
+    order = require("gulp-order"),
+    concat = require('gulp-concat'),
+    cssVendor = [
+        'bower_components/bootstrap/dist/css/bootstrap.css',
+        'bower_components/swiper/dist/css/swiper.css'
+    ],
+    cssVendorOrder = [
+        'bootstrap.css',
+        'swiper.css'
+    ];
+
+gulp.task('styles-vendor-concat', function(){
+    return gulp.src(cssVendor.map(function(f) {
+            return f;
+        }))
+        .pipe(order(cssVendorOrder))
+        .pipe(concat(global.paths.styleCssVendorAllFile))
+        .pipe(gulp.dest(global.paths.src + '/css'))
+        .on('error', gutil.log);
+});
+
+
 
 gulp.task('styles', ['styles-dev'], function () {
     return gulp.src(global.paths.src + '/css/src/main.scss')
