@@ -35,10 +35,37 @@ gulp.task('styles-vendor-theme', ['styles-vendor-concat'], function(){
         .pipe(gulp.dest(global.paths.styleDev + '/css'));
 });
 
+//compile sass to dev folder
+gulp.task('styles-sass', function(){
+    return gulp.src(global.paths.src + '/css/src/main.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass({outputStyle: 'compact'}))
+        .pipe(autoprefixer({browsers: ['> 1%']}))
+        .pipe(sourcemaps.write('.'))
+        .pipe(preprocess({context: { ROOT: '../'}}))
+        .pipe(rename({basename: 'style'}))
+        .pipe(gulp.dest(global.paths.src + '/css'))
+        .on('error', gutil.log);
+});
+
+//compile sass to theme folder
+gulp.task('styles-sass-theme', function(){
+    return gulp.src(global.paths.src + '/css/src/main.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass({outputStyle: 'compact'}))
+        .pipe(autoprefixer({browsers: ['> 1%']}))
+        .pipe(preprocess({context: { ROOT: '../'}}))
+        .pipe(sourcemaps.write('.'))
+        .pipe(rename({basename: 'style'}))
+        .pipe(gulp.dest(global.paths.theme ))
+        .on('error', gutil.log);
+});
 
 
 
 
+
+/*
 gulp.task('styles', ['styles-dev'], function () {
     return gulp.src(global.paths.src + '/css/src/main.scss')
         .pipe(preprocess({context: {ROOT: '/'}}))
@@ -48,7 +75,7 @@ gulp.task('styles', ['styles-dev'], function () {
         .pipe(sourcemaps.write('.'))
         .pipe(rename({basename: 'style'}))
         .pipe(gulp.dest(global.paths.styleDev))
-        .pipe(browserSync.stream({match: '**/*.css'}))
+        .pipe(browserSync.stream({match: '**!/!*.css'}))
         .on('error', gutil.log);
 });
 
@@ -72,4 +99,4 @@ gulp.task('styles-deploy', function () {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(global.paths.styleDist))
         .on('error', gutil.log);
-});
+});*/
