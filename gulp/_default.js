@@ -14,8 +14,11 @@ global.paths = {
     vendorsAllFile: 'vendors.all.js',
     
     styleSrc: '_src/css/src/**/*.scss',
+    styleCssVendorAllFile: 'vendors.all.css',
     styleDist: '_static/css',
     styleDev: '_theme',
+
+
 
     vectorSrc: ['_src/img/**/*.svg', '!_src/img/src/**'],
     vectorDist: '_static/img',

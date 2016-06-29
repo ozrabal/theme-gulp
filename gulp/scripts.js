@@ -10,7 +10,7 @@ var gulp = require('gulp'),
         'index.js'
     ],
     vendor = [
-        '_src/js/vendor/jquery/jquery.js',
+        'bower_components/jquery/dist/jquery.js',
         '_src/js/vendor/bootstrap/bootstrap.js',
     ],
     vendorOrder = [
