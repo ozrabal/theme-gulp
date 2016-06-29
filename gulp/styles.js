@@ -40,11 +40,13 @@ gulp.task('styles-sass', function(){
     return gulp.src(global.paths.src + '/css/src/main.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compact'}))
+        .pipe(preprocess({context: {NODE_ENV: 'DEVELOPMENT', ROOT: ''}}))
         .pipe(autoprefixer({browsers: ['> 1%']}))
         .pipe(sourcemaps.write('.'))
-        .pipe(preprocess({context: { ROOT: '../'}}))
+
         .pipe(rename({basename: 'style'}))
         .pipe(gulp.dest(global.paths.src + '/css'))
+        .pipe(browserSync.reload({stream: true}))
         .on('error', gutil.log);
 });
 

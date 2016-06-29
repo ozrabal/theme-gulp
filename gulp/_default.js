@@ -28,28 +28,46 @@ global.paths = {
     imagesSrc: ['_src/img/**/*.png', '_src/img/**/*.jpg', '_src/img/**/*.gif', '!_src/img/src/**'],
     imagesDist: '_static/img',
 
-    htmlSrc: '_src/html/src/'
+    htmlSrc: '_src/html/src'
 };
 
 var 
     gulp = require('gulp'),
     runSequence = require('run-sequence').use(gulp);
 
-gulp.task('default', function () {
-    runSequence(['vendor', 'scripts', 'scripts-theme', 'styles', 'styles-dev'], 'html', 'browser-sync', function () {
-        gulp.watch(global.paths.scriptSrc, ['scripts','scripts-theme']);
-        gulp.watch(global.paths.vendorSrc + '/**/*.js', ['vendor']);
-        gulp.watch(global.paths.styleSrc, ['styles', 'styles-dev']);
-        gulp.watch(global.paths.styleSrc + '/**/*.css', ['styles', 'styles-dev']);
+
+gulp.task('default', function(){
+    runSequence(['scripts-concat', 'vendor-concat', 'styles-vendor-concat', 'styles-sass'],'html', 'browser-sync',  function () {
+       gulp.watch(global.paths.scriptSrc, ['scripts-concat']);
+        gulp.watch(global.paths.vendorSrc + '/**/*.js', ['vendor-concat']);
+        gulp.watch(global.paths.styleSrc, ['styles-sass']);
+        //gulp.watch(global.paths.styleSrc + '/**/*.css', ['styles', 'styles-dev']);
         gulp.watch(global.paths.spriteSrc, ['sprite']);
         gulp.watch(global.paths.vectorSrc, ['vectors']);
         gulp.watch(global.paths.imagesSrc, ['images']);
         gulp.watch(global.paths.htmlSrc + '/**/*.html', ['html']);
+
+    });
+});
+
+
+
+
+/*gulp.task('default', function () {
+    runSequence(['vendor', 'scripts', 'scripts-theme', 'styles', 'styles-dev'], 'html', 'browser-sync', function () {
+        gulp.watch(global.paths.scriptSrc, ['scripts','scripts-theme']);
+        gulp.watch(global.paths.vendorSrc + '/!**!/!*.js', ['vendor']);
+        gulp.watch(global.paths.styleSrc, ['styles', 'styles-dev']);
+        gulp.watch(global.paths.styleSrc + '/!**!/!*.css', ['styles', 'styles-dev']);
+        gulp.watch(global.paths.spriteSrc, ['sprite']);
+        gulp.watch(global.paths.vectorSrc, ['vectors']);
+        gulp.watch(global.paths.imagesSrc, ['images']);
+        gulp.watch(global.paths.htmlSrc + '/!**!/!*.html', ['html']);
     });
 
 
 
-});
+});*/
 
 gulp.task('deploy-theme', function () {
     runSequence('zip', ['vendor', 'scripts', 'scripts-theme', 'styles', 'styles-dev'])

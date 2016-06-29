@@ -4,18 +4,19 @@ var gulp = require('gulp'),
 
 gulp.task('browser-sync', function() {
     browserSync({
-        proxy: 'http://foo.dv',
-        /*server: {
+        //proxy: 'http://foo.dv',
+        //injectChanges: true,
+        server: {
             baseDir: global.paths.src,
-            middleware: [
+            /*middleware: [
                 modRewrite([
                     '!\\.html|\\.js|\\.json|\\.css|\\.png|\\.jpg|\\.svg|\\.mp4|\\.map$ /index.html [L]'
                 ])
-            ]
-        },*/
-        options: {
-            reloadDelay: 50
+            ]*/
         },
+        /*options: {
+            reloadDelay: 1000
+        },*/
         notify: false,
 	browser: ['firefoxdeveloperedition']
     });
