@@ -11,7 +11,7 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "bower": "^1.7.9",
-    "browser-sync": "^2.12.10",
+    "browser-sync": "^2.13.0",
     "connect-modrewrite": "^0.9.0",
     "del": "^2.2.0",
     "gulp": "^3.9.1",

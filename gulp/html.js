@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
-    htmlmin = require('gulp-htmlmin');
+    htmlmin = require('gulp-htmlmin'),
     browserSync = require('browser-sync'),
     preprocess = require('gulp-preprocess'),
     htmlv = require('gulp-html-validator'),
@@ -9,9 +9,11 @@ var gulp = require('gulp'),
 gulp.task('html', function () {
     return gulp.src(global.paths.htmlSrc + '/pages/*.html')
         .pipe(preprocess({context: {NODE_ENV: 'DEVELOPMENT', DEBUG: true, ROOT: '', THEME_PATH: 'wp-content/themes/amuz/', SEE: 'Link', DECACHE: Date.now()}}))
-        .pipe(gulp.dest(global.paths.src))
-        .pipe(browserSync.reload({stream: true}))
-        .on('error', gutil.log);
+        .pipe(gulp.dest(global.paths.src));
+    //browserSync.reload();
+        //.pipe(browserSync.stream());
+        //.pipe(browserSync.stream())
+        //.on('error', gutil.log);
 });
 
 gulp.task('validator', function () {
