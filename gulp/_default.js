@@ -1,4 +1,5 @@
 global.themeName = 'amuz' ;
+global.siteURL = 'http://teampower.dv';
 global.paths = {
     src: '_src',
     dist: '_static',
@@ -72,23 +73,21 @@ gulp.task('default', function(){
 });
 
 
+gulp.task('theme', function(){
+    runSequence(['scripts-theme', 'vendor-theme', 'styles-vendor-theme', 'styles-sass-theme'],'html-dev', 'browser-sync-theme',  function () {
+        gulp.watch(global.paths.scriptSrc, ['scripts-theme']);
+        gulp.watch(global.paths.vendorSrc + '/**/*.js', ['vendor-theme']);
+        gulp.watch(global.paths.styleSrc, ['styles-sass', 'styles-sass-theme']);
+        //gulp.watch(global.paths.styleSrc + '/**/*.css', ['styles', 'styles-dev']);
+        //gulp.watch(global.paths.spriteSrc, ['sprite']);
+        //gulp.watch(global.paths.vectorSrc, ['vectors']);
+        //gulp.watch(global.paths.imagesSrc, ['images']);
+        gulp.watch(global.paths.htmlSrc + '/**/*.html', ['html-dev', browserSync.reload]);
 
-
-/*gulp.task('default', function () {
-    runSequence(['vendor', 'scripts', 'scripts-theme', 'styles', 'styles-dev'], 'html', 'browser-sync', function () {
-        gulp.watch(global.paths.scriptSrc, ['scripts','scripts-theme']);
-        gulp.watch(global.paths.vendorSrc + '/!**!/!*.js', ['vendor']);
-        gulp.watch(global.paths.styleSrc, ['styles', 'styles-dev']);
-        gulp.watch(global.paths.styleSrc + '/!**!/!*.css', ['styles', 'styles-dev']);
-        gulp.watch(global.paths.spriteSrc, ['sprite']);
-        gulp.watch(global.paths.vectorSrc, ['vectors']);
-        gulp.watch(global.paths.imagesSrc, ['images']);
-        gulp.watch(global.paths.htmlSrc + '/!**!/!*.html', ['html']);
     });
+});
 
 
-
-});*/
 
 gulp.task('deploy-theme', function () {
     runSequence('zip', ['vendor', 'scripts', 'scripts-theme', 'styles', 'styles-dev'])
