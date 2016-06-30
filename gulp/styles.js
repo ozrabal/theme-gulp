@@ -63,8 +63,31 @@ gulp.task('styles-sass-theme', function(){
         .on('error', gutil.log);
 });
 
+//concat all styles (vendors & custom css)
+gulp.task('styles-concat', ['styles-vendor-concat', 'styles-sass'], function(){
+    return gulp.src([
+            global.paths.src + '/css/style.css',
+            global.paths.src + '/css/' + global.paths.styleCssVendorAllFile
+        ])
+        .pipe(order([
+            global.paths.styleCssVendorAllFile,
+            'style.css'
+        ]))
+        .pipe(concat('style.all.css'))
+        .pipe(preprocess({context: {NODE_ENV: 'PRODUCTION', ROOT: ''}}))
+        .pipe(gulp.dest(global.paths.styleDist ))
+        .on('error', gutil.log);
+});
 
-
+//minimize concatenated styles
+gulp.task('styles-deploy',['styles-concat'], function() {
+    return gulp.src(global.paths.styleDist + '/style.all.css')
+        .pipe(cleanCSS())
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(global.paths.styleDist));
+});
 
 
 /*
