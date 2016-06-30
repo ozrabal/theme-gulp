@@ -33,6 +33,7 @@ global.paths = {
 
 var 
     gulp = require('gulp'),
+    browserSync = require('browser-sync'),
     runSequence = require('run-sequence').use(gulp);
 
 
@@ -45,7 +46,7 @@ gulp.task('default', function(){
         gulp.watch(global.paths.spriteSrc, ['sprite']);
         gulp.watch(global.paths.vectorSrc, ['vectors']);
         gulp.watch(global.paths.imagesSrc, ['images']);
-        gulp.watch(global.paths.htmlSrc + '/**/*.html', ['html']);
+        gulp.watch(global.paths.htmlSrc + '/**/*.html', ['html', browserSync.reload]);
 
     });
 });
