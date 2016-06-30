@@ -58,15 +58,15 @@ var
 
 
 gulp.task('default', function(){
-    runSequence(['scripts-concat', 'vendor-concat', 'styles-vendor-concat', 'styles-sass'],'html', 'browser-sync',  function () {
+    runSequence(['scripts-concat', 'vendor-concat', 'styles-vendor-concat', 'styles-sass'],'html-dev', 'browser-sync',  function () {
        gulp.watch(global.paths.scriptSrc, ['scripts-concat']);
         gulp.watch(global.paths.vendorSrc + '/**/*.js', ['vendor-concat']);
         gulp.watch(global.paths.styleSrc, ['styles-sass']);
         //gulp.watch(global.paths.styleSrc + '/**/*.css', ['styles', 'styles-dev']);
-        gulp.watch(global.paths.spriteSrc, ['sprite']);
-        gulp.watch(global.paths.vectorSrc, ['vectors']);
-        gulp.watch(global.paths.imagesSrc, ['images']);
-        gulp.watch(global.paths.htmlSrc + '/**/*.html', ['html', browserSync.reload]);
+        //gulp.watch(global.paths.spriteSrc, ['sprite']);
+        //gulp.watch(global.paths.vectorSrc, ['vectors']);
+        //gulp.watch(global.paths.imagesSrc, ['images']);
+        gulp.watch(global.paths.htmlSrc + '/**/*.html', ['html-dev', browserSync.reload]);
 
     });
 });
