@@ -22,6 +22,7 @@ global.paths = {
 
 
     vectorSrc: ['_src/img/**/*.svg', '!_src/img/src/**'],
+    vectorTheme: '_theme/img',
     vectorDist: '_static/img',
 
     spriteSrc: '_src/img/src/**/*.png',
@@ -75,13 +76,13 @@ gulp.task('default', function(){
 
 
 gulp.task('theme', function(){
-    runSequence(['scripts-theme', 'vendor-theme', 'styles-vendor-theme','styles-sass', 'styles-sass-theme'],'html-dev', 'browser-sync-theme',  function () {
+    runSequence(['scripts-theme', 'vendor-theme', 'styles-vendor-theme','styles-sass', 'styles-sass-theme', 'images-theme', 'vectors-theme'],'html-dev', 'browser-sync-theme',  function () {
         gulp.watch(global.paths.scriptSrc, ['scripts-theme']);
         gulp.watch(global.paths.vendorSrc + '/**/*.js', ['vendor-theme']);
         gulp.watch(global.paths.styleSrc, ['styles-sass', 'styles-sass-theme']);
         //gulp.watch(global.paths.styleSrc + '/**/*.css', ['styles', 'styles-dev']);
         //gulp.watch(global.paths.spriteSrc, ['sprite']);
-        //gulp.watch(global.paths.vectorSrc, ['vectors']);
+        gulp.watch(global.paths.vectorSrc, ['vectors-theme', browserSync.reload]);
         gulp.watch(global.paths.imagesSrc, ['images-theme', browserSync.reload]);
         gulp.watch(global.paths.htmlSrc + '/**/*.html', ['html-dev', browserSync.reload]);
 
