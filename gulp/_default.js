@@ -27,6 +27,7 @@ global.paths = {
     spriteSrc: '_src/img/src/**/*.png',
 
     imagesSrc: ['_src/img/**/*.png', '_src/img/**/*.jpg', '_src/img/**/*.gif', '!_src/img/src/**'],
+    imagesTheme: '_theme/img',
     imagesDist: '_static/img',
 
     htmlSrc: '_src/html/src'
@@ -81,7 +82,7 @@ gulp.task('theme', function(){
         //gulp.watch(global.paths.styleSrc + '/**/*.css', ['styles', 'styles-dev']);
         //gulp.watch(global.paths.spriteSrc, ['sprite']);
         //gulp.watch(global.paths.vectorSrc, ['vectors']);
-        //gulp.watch(global.paths.imagesSrc, ['images']);
+        gulp.watch(global.paths.imagesSrc, ['images-theme', browserSync.reload]);
         gulp.watch(global.paths.htmlSrc + '/**/*.html', ['html-dev', browserSync.reload]);
 
     });
@@ -89,5 +90,5 @@ gulp.task('theme', function(){
 
 
 gulp.task('deploy-static', function () {
-    runSequence('zip-static', ['scripts-deploy','styles-deploy', 'html-deploy']);
+    runSequence('zip-static', ['scripts-deploy','styles-deploy', 'html-deploy', 'images-deploy']);
 });
