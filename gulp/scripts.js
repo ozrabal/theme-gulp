@@ -111,7 +111,22 @@ gulp.task('script-theme-deploy',['vendor-theme', 'scripts-theme'], function(){
 })
 
 
-
+gulp.task('scripts-deploy', ['vendor-min','scripts-min'], function(){
+    return gulp.src([
+        global.paths.src + '/js/' + global.paths.scriptsAllFile,
+        global.paths.src + '/js/' + global.paths.vendorsAllFile
+    ])
+        .pipe(order([
+            global.paths.vendorsAllFile,
+            global.paths.scriptsAllFile
+        ]))
+        .pipe(concat(global.themeName + '.all.js'))
+        .pipe(uglify())
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(global.paths.scriptDist));
+});
 
 
 /*gulp.task('scripts', function () {

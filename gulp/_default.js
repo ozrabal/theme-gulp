@@ -74,7 +74,7 @@ gulp.task('default', function(){
 
 
 gulp.task('theme', function(){
-    runSequence(['scripts-theme', 'vendor-theme', 'styles-vendor-theme', 'styles-sass-theme'],'html-dev', 'browser-sync-theme',  function () {
+    runSequence(['scripts-theme', 'vendor-theme', 'styles-vendor-theme','styles-sass', 'styles-sass-theme'],'html-dev', 'browser-sync-theme',  function () {
         gulp.watch(global.paths.scriptSrc, ['scripts-theme']);
         gulp.watch(global.paths.vendorSrc + '/**/*.js', ['vendor-theme']);
         gulp.watch(global.paths.styleSrc, ['styles-sass', 'styles-sass-theme']);
@@ -88,7 +88,6 @@ gulp.task('theme', function(){
 });
 
 
-
-gulp.task('deploy-theme', function () {
-    runSequence('zip', ['vendor', 'scripts', 'scripts-theme', 'styles', 'styles-dev'])
+gulp.task('deploy-static', function () {
+    runSequence('zip-static', ['scripts-deploy','styles-deploy', 'html-deploy']);
 });
