@@ -31,6 +31,26 @@ global.paths = {
     htmlSrc: '_src/html/src'
 };
 
+global.contextVarsDevelopment = {
+    NODE_ENV: 'DEVELOPMENT',
+    DEBUG: true,
+    ROOT: '',
+    DECACHE: Date.now()
+};
+
+global.contextVarsDeploy = {
+    NODE_ENV: 'DEVELOPMENT',
+    DEBUG: true,
+    ROOT: '',
+    DECACHE: Date.now()
+};
+global.contextVarsTheme = {
+    NODE_ENV: 'DEVELOPMENT',
+    DEBUG: true,
+    ROOT: '',
+    DECACHE: Date.now()
+};
+
 var 
     gulp = require('gulp'),
     browserSync = require('browser-sync'),
