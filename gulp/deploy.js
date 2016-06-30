@@ -16,9 +16,9 @@ gulp.task('clean', function() {
     }
 );
 
-gulp.task('zip', function() {
-    return gulp.src(global.paths.theme + '/**')
+gulp.task('zip-static', function() {
+    return gulp.src(global.paths.dist + '/**')
         .pipe(zip(global.themeName + '.zip'))
-        .pipe(gulp.dest(''));
+        .pipe(gulp.dest(global.paths.dist));
 });
 

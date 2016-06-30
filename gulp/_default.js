@@ -88,8 +88,6 @@ gulp.task('theme', function(){
 });
 
 
-
-
 gulp.task('deploy-static', function () {
-    runSequence('zip', ['scripts-deploy','style-deploy', 'html-deploy']);
+    runSequence('zip-static', ['scripts-deploy','styles-deploy', 'html-deploy']);
 });
