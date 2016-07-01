@@ -66,10 +66,12 @@ gulp.task('styles-sass-theme', function(){
 //concat all styles (vendors & custom css)
 gulp.task('styles-concat', ['styles-vendor-concat', 'styles-sass'], function(){
     return gulp.src([
+            global.paths.src + '/css/src/head.css',
             global.paths.src + '/css/style.css',
             global.paths.src + '/css/' + global.paths.styleCssVendorAllFile
         ])
         .pipe(order([
+            'head.css',
             global.paths.styleCssVendorAllFile,
             'style.css'
         ]))
@@ -93,6 +95,7 @@ gulp.task('styles-deploy',['styles-concat'], function() {
 gulp.task('styles-deploy-theme',['styles-concat'], function() {
     return gulp.src(global.paths.styleDist + '/style.all.css')
         .pipe(cleanCSS())
+
         .pipe(rename({
             suffix: '.min'
         }))
