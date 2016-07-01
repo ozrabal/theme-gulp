@@ -89,6 +89,16 @@ gulp.task('styles-deploy',['styles-concat'], function() {
         .pipe(gulp.dest(global.paths.styleDist));
 });
 
+//minimize concatenated styles in theme dist
+gulp.task('styles-deploy-theme',['styles-concat'], function() {
+    return gulp.src(global.paths.styleDist + '/style.all.css')
+        .pipe(cleanCSS())
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(global.paths.theme));
+});
+
 
 /*
 gulp.task('styles', ['styles-dev'], function () {
