@@ -13,6 +13,17 @@ var gulp = require('gulp'),
             .on('error', gutil.log);
 });*/
 
+gulp.task('folders-deploy', function() {
+    return gulp.src(global.paths.copyFolders,{base:global.paths.src})
+        .pipe(gulp.dest(global.paths.dist))
+        .on('error', gutil.log);
+});
+
+gulp.task('folders-deploy-theme', function() {
+    return gulp.src(global.paths.copyFolders,{base:global.paths.src})
+        .pipe(gulp.dest(global.paths.theme))
+        .on('error', gutil.log);
+});
 
 gulp.task('images-theme', function () {
     return gulp.src(global.paths.imagesSrc)

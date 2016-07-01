@@ -28,6 +28,8 @@ global.paths = {
     imagesTheme: '_theme/img',
     imagesDist: '_static/img',
 
+    copyFolders: ['_src/fonts/**/'],
+
     htmlSrc: '_src/html/src'
 };
 
@@ -69,7 +71,7 @@ gulp.task('default', function(){
 
 //WordPress theme
 gulp.task('theme', function(){
-    runSequence(['scripts-theme', 'vendor-theme', 'styles-vendor-theme','styles-sass', 'styles-sass-theme', 'images-theme', 'vectors-theme'],'html-dev', 'browser-sync-theme',  function () {
+    runSequence(['scripts-theme', 'vendor-theme', 'styles-vendor-theme','styles-sass', 'styles-sass-theme', 'folders-deploy-theme', 'images-theme', 'vectors-theme'],'html-dev', 'browser-sync-theme',  function () {
         gulp.watch(global.paths.scriptSrc, ['scripts-theme']);
         gulp.watch(global.paths.vendorSrc + '/**/*.js', ['vendor-theme']);
         gulp.watch(global.paths.styleSrc, ['styles-sass', 'styles-sass-theme']);
@@ -81,5 +83,9 @@ gulp.task('theme', function(){
 });
 
 gulp.task('deploy-static', function () {
-    runSequence('zip-static', ['scripts-deploy','styles-deploy', 'html-deploy', 'images-deploy']);
+    runSequence('zip-static', ['scripts-deploy','styles-deploy', 'html-deploy', 'images-deploy', 'folders-deploy']);
+});
+
+gulp.task('deploy-theme', function () {
+    runSequence( ['scripts-deploy-theme','styles-deploy-theme',  'images-theme', 'vectors-theme', 'folders-deploy-theme']);
 });
