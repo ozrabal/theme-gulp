@@ -13,6 +13,7 @@ gulp.task('html-dev', function () {
         }))
         .pipe(gulp.dest(global.paths.src))
         .on('error', gutil.log);
+
 });
 
 //run validation html
