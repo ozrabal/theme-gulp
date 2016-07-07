@@ -69,7 +69,6 @@ gulp.task('default', function(){
         gulp.watch(global.paths.vendorSrc + '/**/*.js', ['vendor-concat']);
         gulp.watch(global.paths.styleSrc, ['styles-sass']);
         gulp.watch(global.paths.htmlSrc + '/**/*.html', ['html-dev', browserSync.reload]);
-
     });
 });
 
