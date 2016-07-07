@@ -1,51 +1,54 @@
-global.themeName = 'theme' ;
+global.themeName = 'theme';
 global.siteURL = 'http://theme.dv';
 global.paths = {
-    src: '_src',
-    dist: '_static',
-    theme: '_theme',
+    src: '_src', //sources dir
+    dist: '_static', //static theme deploy dir
+    theme: '_theme', //WordPress theme dir
 
-    scriptSrc: '_src/js/src/**/*.js',
-    scriptsAllFile: 'scripts.all.js',
-    scriptDist: '_static/js',
-    scriptTheme: './_theme/js',
+    htmlSrc: '_src/html/src', //html files src
 
-    vendorSrc: '_src/js/vendor',
-    vendorsAllFile: 'vendors.all.js',
+    scriptSrc: '_src/js/src/**/*.js', //js scripts parts sources
+    scriptsAllFile: 'scripts.all.js', //concatenated js file name
+    scriptDist: '_static/js', //static theme deploy scripts dir
+    scriptTheme: './_theme/js', //WP theme scripts dir
+
+    vendorSrc: '_src/js/vendor', //vendors dir
+    vendorsAllFile: 'vendors.all.js', //concatenated vendors file
     
-    styleSrc: '_src/css/src/**/*.scss',
-    styleCssVendorAllFile: 'vendors.all.css',
-    styleDist: '_static/css',
-    styleDev: '_theme',
+    styleSrc: '_src/css/src/**/*.scss', //sass sources
+    styleCssVendorAllFile: 'vendors.all.css', //concatenated vendors file
+    styleDist: '_static/css', //static theme css dir
+    styleDev: '_theme', //WP theme css dir
 
-    vectorSrc: ['_src/img/**/*.svg', '!_src/img/src/**'],
-    vectorTheme: '_theme/img',
-    vectorDist: '_static/img',
+    vectorSrc: ['_src/img/**/*.svg', '!_src/img/src/**'], //svg files sources
+    vectorDist: '_static/img', //static theme svg dir
+    vectorTheme: '_theme/img', //WP theme svg dir
 
-    spriteSrc: '_src/img/src/**/*.png',
+    spriteSrc: '_src/img/src/**/*.png', //sprites src dir
 
-    imagesSrc: ['_src/img/**/*.png', '_src/img/**/*.jpg', '_src/img/**/*.gif', '!_src/img/src/**'],
-    imagesTheme: '_theme/img',
-    imagesDist: '_static/img',
+    imagesSrc: ['_src/img/**/*.png', '_src/img/**/*.jpg', '_src/img/**/*.gif', '!_src/img/src/**'], //image sources
+    imagesDist: '_static/img', //static theme image destination dir
+    imagesTheme: '_theme/img', //WP theme image destination dir
 
-    copyFolders: ['_src/fonts/**/'],
+    copyFolders: ['_src/fonts/**/'] //files from this dir being copied "as is" to WP theme & static theme
 
-    htmlSrc: '_src/html/src'
 };
 
+//development env vars
 global.contextVarsDevelopment = {
     NODE_ENV: 'DEVELOPMENT',
     DEBUG: true,
     ROOT: '',
     DECACHE: Date.now()
 };
-
+//deploy env vars
 global.contextVarsDeploy = {
-    NODE_ENV: 'DEVELOPMENT',
+    NODE_ENV: 'PRODUCTION',
     DEBUG: true,
     ROOT: '',
     DECACHE: Date.now()
 };
+//wp theme deploy env vars
 global.contextVarsTheme = {
     NODE_ENV: 'DEVELOPMENT',
     DEBUG: true,
@@ -53,12 +56,13 @@ global.contextVarsTheme = {
     DECACHE: Date.now()
 };
 
+//tasks
 var 
     gulp = require('gulp'),
     browserSync = require('browser-sync'),
     runSequence = require('run-sequence').use(gulp);
 
-//static
+//static theme default task
 gulp.task('default', function(){
     runSequence(['scripts-concat', 'vendor-concat', 'styles-vendor-concat', 'styles-sass'],'html-dev', 'browser-sync',  function () {
        gulp.watch(global.paths.scriptSrc, ['scripts-concat']);
@@ -82,6 +86,7 @@ gulp.task('theme', function(){
     });
 });
 
+//deploys
 gulp.task('deploy-static', function () {
     runSequence('zip-static', ['scripts-deploy','styles-deploy', 'html-deploy', 'images-deploy', 'folders-deploy']);
 });

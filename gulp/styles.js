@@ -9,14 +9,15 @@ var gulp = require('gulp'),
     preprocess = require('gulp-preprocess'),
     order = require("gulp-order"),
     concat = require('gulp-concat'),
+//@TODO move this to _default
     cssVendor = [
         'bower_components/bootstrap/dist/css/bootstrap.css',
         'bower_components/swiper/dist/css/swiper.css'
-    ],
+    ], //vendors paths
     cssVendorOrder = [
         'bootstrap.css',
         'swiper.css'
-    ];
+    ]; //vendors order
 
 //concatenate vendors
 gulp.task('styles-vendor-concat', function(){
@@ -40,7 +41,9 @@ gulp.task('styles-sass', function(){
     return gulp.src(global.paths.src + '/css/src/main.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compact'}))
-        .pipe(preprocess({context: {NODE_ENV: 'DEVELOPMENT', ROOT: ''}}))
+        .pipe(preprocess({
+            context: global.contextVarsDevelopment
+        }))
         .pipe(autoprefixer({browsers: ['> 1%']}))
         .pipe(sourcemaps.write('.'))
 
@@ -56,7 +59,9 @@ gulp.task('styles-sass-theme', function(){
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compact'}))
         .pipe(autoprefixer({browsers: ['> 1%']}))
-        .pipe(preprocess({context: { ROOT: '../'}}))
+        .pipe(preprocess({
+            context: global.contextVarsTheme
+        }))
         .pipe(sourcemaps.write('.'))
         .pipe(rename({basename: 'style'}))
         .pipe(gulp.dest(global.paths.theme ))
@@ -66,7 +71,7 @@ gulp.task('styles-sass-theme', function(){
 //concat all styles (vendors & custom css)
 gulp.task('styles-concat', ['styles-vendor-concat', 'styles-sass'], function(){
     return gulp.src([
-            global.paths.src + '/css/src/head.css',
+            global.paths.src + '/css/src/head.css', //WP styles header
             global.paths.src + '/css/style.css',
             global.paths.src + '/css/' + global.paths.styleCssVendorAllFile
         ])
@@ -76,7 +81,9 @@ gulp.task('styles-concat', ['styles-vendor-concat', 'styles-sass'], function(){
             'style.css'
         ]))
         .pipe(concat('style.all.css'))
-        .pipe(preprocess({context: {NODE_ENV: 'PRODUCTION', ROOT: ''}}))
+        .pipe(preprocess({
+            context: global.contextVarsDevelopment
+        }))
         .pipe(gulp.dest(global.paths.styleDist ))
         .on('error', gutil.log);
 });
@@ -95,46 +102,8 @@ gulp.task('styles-deploy',['styles-concat'], function() {
 gulp.task('styles-deploy-theme',['styles-concat'], function() {
     return gulp.src(global.paths.styleDist + '/style.all.css')
         .pipe(cleanCSS())
-
         .pipe(rename({
             suffix: '.min'
         }))
         .pipe(gulp.dest(global.paths.theme));
 });
-
-
-/*
-gulp.task('styles', ['styles-dev'], function () {
-    return gulp.src(global.paths.src + '/css/src/main.scss')
-        .pipe(preprocess({context: {ROOT: '/'}}))
-        .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'compact'}))
-        .pipe(autoprefixer({browsers: ['> 1%']}))
-        .pipe(sourcemaps.write('.'))
-        .pipe(rename({basename: 'style'}))
-        .pipe(gulp.dest(global.paths.styleDev))
-        .pipe(browserSync.stream({match: '**!/!*.css'}))
-        .on('error', gutil.log);
-});
-
-gulp.task('styles-dev', function () {
-    return gulp.src(global.paths.src + '/css/src/main.scss')
-        .pipe(preprocess({context: {ROOT: ''}}))
-        .pipe(sass({outputStyle: 'compact'}))
-        .pipe(autoprefixer({browsers: ['> 1%']}))
-        .pipe(rename({basename: 'style'}))
-        .pipe(gulp.dest(global.paths.src + '/css'))
-        .on('error', gutil.log);
-});
-
-gulp.task('styles-deploy', function () {
-    return gulp.src(global.paths.src + '/css/src/main.scss')
-        .pipe(preprocess({context: {ROOT: ''}}))
-        .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'compressed'}))
-        .pipe(autoprefixer({browsers: ['> 1%']}))
-        .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(global.paths.styleDist))
-        .on('error', gutil.log);
-});*/

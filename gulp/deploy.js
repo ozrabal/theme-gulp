@@ -6,12 +6,11 @@ gulp.task('clean', function() {
         return del([
             global.paths.dist,
             global.paths.dist + '.zip',
-            'app/css/*.css',
-            'app/css/*.scss',
-            'app/css/*.map',
-            'app/js/*.js',
-            'app/js/*.map',
-            'app/js/vendor'
+            global.paths.src + '/css/*.css',
+            global.paths.src + '/css/*.map',
+            global.paths.src + '/js/*.js',
+            global.paths.src + '/js/*.map',
+            global.paths.src + '/js/vendor'
         ]);
     }
 );

@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
-    browserSync = require('browser-sync'),
-    modRewrite = require('connect-modrewrite');
+    browserSync = require('browser-sync');
 
 //reload browser static site
 gulp.task('browser-sync', function() {
@@ -21,6 +20,6 @@ gulp.task('browser-sync-theme', function() {
             reloadDelay: 250
          },
         notify: false,
-        browser: ['firefoxdeveloperedition']
+        browser: ['firefoxdeveloperedition'] //"google chrome", "firefox" see https://www.browsersync.io/docs/options#option-browser
     });
 });

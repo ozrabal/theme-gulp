@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
         gutil = require('gulp-util'),
-        browserSync = require('browser-sync'),
         svgmin = require('gulp-svgmin');
 
 //clean svg & move to theme folder

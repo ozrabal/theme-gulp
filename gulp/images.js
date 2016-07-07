@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
         gutil = require('gulp-util'),
-        browserSync = require('browser-sync'),
         imagemin = require('gulp-imagemin'),
         pngquant = require('imagemin-pngquant'),
         sprite = require('gulp.spritesmith');

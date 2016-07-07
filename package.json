@@ -1,12 +1,12 @@
 {
   "name": "theme",
   "version": "2.0.0",
-  "description": "Gulp workflow for static html template",
+  "description": "Integrated gulp workflow for static html template & WordPress theme",
   "main": "index.html",
   "author": "Piotr Łepkowski",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ozrabal/theme-gulp"
   },
   "license": "UNLICENSED",
   "devDependencies": {
