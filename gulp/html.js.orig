@@ -1,6 +1,10 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     htmlmin = require('gulp-htmlmin'),
+<<<<<<< HEAD
+    browserSync = require('browser-sync'),
+=======
+>>>>>>> release/2.2.0
     preprocess = require('gulp-preprocess'),
     htmlv = require('gulp-html-validator'),
     rename = require('gulp-rename');
@@ -8,11 +12,20 @@ var gulp = require('gulp'),
 //concat html to dev folder
 gulp.task('html-dev', function () {
     return gulp.src(global.paths.htmlSrc + '/pages/*.html')
+<<<<<<< HEAD
+        .pipe(preprocess({context: {NODE_ENV: 'DEVELOPMENT', DEBUG: true, ROOT: '', THEME_PATH: 'wp-content/themes/amuz/', SEE: 'Link', DECACHE: Date.now()}}))
+        .pipe(gulp.dest(global.paths.src));
+    //browserSync.reload();
+        //.pipe(browserSync.stream());
+        //.pipe(browserSync.stream())
+        //.on('error', gutil.log);
+=======
         .pipe(preprocess({
             context: global.contextVarsDevelopment
         }))
         .pipe(gulp.dest(global.paths.src))
         .on('error', gutil.log);
+>>>>>>> release/2.2.0
 });
 
 //run validation html

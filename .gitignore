@@ -9,7 +9,4 @@ npm-debug.log*
 
 bower_components
 
-_src/*
-_static
-_theme
-_dist
+

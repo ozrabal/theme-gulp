@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Theme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- @if NODE_ENV='DEVELOPMENT' -->
+    <link href="<!--@echo ROOT-->css/vendors.all.css?decache=<!--@echo DECACHE-->" rel="stylesheet">
+    <link href="<!--@echo ROOT-->css/style.css?decache=<!--@echo DECACHE-->" rel="stylesheet">
+    <!-- @endif -->
+    <!-- @if NODE_ENV='PRODUCTION' -->
+    <link href="<!--@echo ROOT-->css/style.css" rel="stylesheet">
+    <!-- @endif -->
+</head>
+  <body>
+  <div class="container wrapper">
+    <!-- @include top.html -->
+    <!-- @extendable -->
+  </div>
+  <!-- @include footer.html -->
+  <!-- @if NODE_ENV='DEVELOPMENT' -->
+  <script src="<!--@echo ROOT-->js/vendors.all.js?decache=<!--@echo DECACHE-->"></script>
+  <script src="<!--@echo ROOT-->js/scripts.all.js?decache=<!--@echo DECACHE-->"></script>
+  <!-- @endif -->
+  <!-- @if NODE_ENV='PRODUCTION' -->
+  <script src="<!--@echo ROOT-->js/scripts.all.min.js"></script>
+  <!-- @endif -->
+  </body>
+</html>
